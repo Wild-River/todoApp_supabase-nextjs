@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   switch (metric.name) {
@@ -34,7 +35,11 @@ const queryClient = new QueryClient({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  )
 }
 
 export default MyApp
